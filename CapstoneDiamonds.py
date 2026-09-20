@@ -46,7 +46,7 @@ plt.title('Diamond Price Distribution')
 # Plot 2: Carat vs Price by Cut
 plt.subplot(1, 3, 2)
 sns.scatterplot(data=df.sample(2000, random_state=42), x='carat', y='price', hue='cut', alpha=0.6)
-plt.title('Carat vs Price (Sampleed)')
+plt.title('Carat vs Price (Sample d)')
 
 # Plot 3: Correlation Matrix Heatmap
 plt.subplot(1, 3, 3)
@@ -73,7 +73,7 @@ cut_mapping = {'Fair': 0, 'Good': 1, 'Very Good': 2, 'Premium': 3, 'Ideal': 4}
 color_mapping = {'J': 0, 'I': 1, 'H': 2, 'G': 3, 'F': 4, 'E': 5, 'D': 6}
 clarity_mapping = {'I1': 0, 'SI2': 1, 'SI1': 2, 'VS2': 3, 'VS1': 4, 'VVS2': 5, 'VVS1': 6, 'IF': 7}
 
-# FIX: Map and explicitly force the data type to regular integers
+# Map and explicitly force the data type to regular integers
 df['cut_encoded'] = df['cut'].map(cut_mapping).astype(int)
 df['color_encoded'] = df['color'].map(color_mapping).astype(int)
 df['clarity_encoded'] = df['clarity'].map(clarity_mapping).astype(int)
@@ -89,6 +89,7 @@ print("Feature Engineering completed successfully with fixed dtypes.")
 # 4. DIAMOND CLARITY CLASSIFICATION (ANN)
 # =====================================================================
 print("\n--- 4. Training Clarity Classification Model (ANN) ---")
+# Feedforward Neural Network (FNN), specifically a Multi-Layer Perceptron (MLP).
 
 # Import the explicit Input layer to comply with newer Keras APIs
 from tensorflow.keras.layers import Input
@@ -118,7 +119,7 @@ ann_model = Sequential([
 ann_model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 # Train Network
-ann_model.fit(X_train_c_scaled, y_train_c, epochs=5, batch_size=64, validation_split=0.1, verbose=1)
+ann_model.fit(X_train_c_scaled, y_train_c, epochs=1, batch_size=64, validation_split=0.1, verbose=1)
 
 # Evaluate Classification
 y_pred_c_prob = ann_model.predict(X_test_c_scaled)
